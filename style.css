@@ -1,0 +1,22 @@
+body {
+    background-color: #e0e0e0;
+  }
+  
+  h2 {
+    color: navy;
+    margin-left: 20px;
+  }
+.timerform{
+    width: 50%;
+    border: 10pt;
+    border-color: black;
+    background-color: white;
+    float: left;
+}
+.timer{
+    width: 50%;
+    float: right;
+}
+.timer p{
+    font-size: 400%;
+}
