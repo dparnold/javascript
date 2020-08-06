@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" type="text/css" href="style.css">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script>
+        function fillZeros(number, digits) {
+            var zero = "0";
+            var length = number.toString().length;
+            if (digits - length > 0) {
+                return zero.repeat(digits - length) + number;
+            }
+            else {
+                return number;
+            }
+        }
+    </script>
+
+</head>
+
 
 <body>
     <div id="myOverlay" class="overlay">
         <div class="timer">
-            <p id="count">Press "Start" to start the timer.</p>
+            <h1 id="count">Press "Start" to start the timer.</h1>
+            <Button id="overlayButton" onclick="stop()">Stop</Button>
         </div>
     </div>
     <div class="timerbox">
@@ -14,10 +32,18 @@
         </div>
         <div class="timerform">
             <form action="" name="timer" method="GET">
-                <label for="minutes">Minutes: </label>
-                <input type="text" id="minutes" name="minutes" value=0><br><br>
-                <label for="seconds">seconds: </label>
-                <input type="text" id="seconds" name="seconds" value=3><br><br>
+                <div class="formgroup">
+                    <label for="minutes">Minutes: &nbsp;</label>
+                    <input type="text" id="minutes" name="minutes" value=3>
+
+                </div>
+                <div class="formgroup">
+
+                    <label for="seconds">Seconds: &nbsp;</label>
+                    <input type="text" id="seconds" name="seconds" value=30>
+
+                </div>
+
                 <input type="button" id="button" onclick="runTimer(this)" value="Start">
             </form>
         </div>
@@ -27,6 +53,14 @@
 
     <script>
         counterText = document.getElementById("count");
+        button = document.getElementById("button")
+        function stop() {
+            document.getElementById("myOverlay").style.display = "none";
+            clearInterval(button.interval);
+            button.interval = undefined;
+            button.value = "Start"
+            counterText.innerHTML = "Press \"Start\" to start the timer.";
+        }
         function runTimer(b) {
             var min = document.forms["timer"]["minutes"].value;
             if (min == "") {
@@ -42,7 +76,7 @@
             }
             else {
                 document.getElementById("myOverlay").style.display = "block";
-                counterText.innerHTML = min + " : " + sec;
+                counterText.innerHTML = fillZeros(min, 2) + " : " + fillZeros(sec, 2);
                 b.interval = setInterval(function () {
                     if (document.getElementById("button").value == "Stop") {
                         counterText.innerHTML = "";
@@ -61,12 +95,12 @@
                         else {
                             sec = 59;
                             min = min - 1;
-                            counterText.innerHTML = min + " : " + sec;
+                            counterText.innerHTML = fillZeros(min, 2) + " : " + fillZeros(sec, 2);
                         }
                     }
                     else {
                         sec = sec - 1;
-                        counterText.innerHTML = min + " : " + sec;
+                        counterText.innerHTML = fillZeros(min, 2) + " : " + fillZeros(sec, 2);
                     }
                 }, 1000);
                 b.value = "Stop";
@@ -77,6 +111,7 @@
                 return false;
             }
         }
+
     </script>
 
 </body>

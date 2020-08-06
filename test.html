@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<body>
+
+    <h1 id="text">Responsive Text</h1>
+
+    <script>
+        function fillZeros(number, digits) {
+            var zero = "0";
+            var length = number.toString().length;
+            if (digits-length>0){
+                return zero.repeat(digits-length)+number;
+            }
+            else{
+                return number;
+            }
+        }
+        var filler = 4;
+        var char = "0";
+        document.getElementById("text").innerHTML = fillZeros(3,2);
+    </script>
+
+</body>
+
+</html>
